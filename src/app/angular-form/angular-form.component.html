@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()">
+    <div class='form-group'>
+        <label for="id">Id</label>
+        <input type="number" id="id" ngModel name="id" class="form-control">
+    </div>
+    <div class='form-group'>
+        <label for="firstName">First Name</label>
+        <input 
+            required 
+            minlength="3" 
+            maxlength="20" 
+            pattern="[a-zA-Z0-9-]+" 
+            ngModel  
+            name="firstName" 
+            #firstName="ngModel" 
+            (change)="log(firstName)"
+            id="firstName"
+            type="text" 
+            class="form-control">
+        <div 
+            class="alert alert-danger" 
+            *ngIf="firstName.touched && !firstName.valid">
+            <div *ngIf="firstName.errors.required">
+                First Name is required.
+            </div>
+            <div *ngIf="firstName.errors.minlength">
+                First Name should have a minimum of {{ firstName.errors.minlength.requiredLength }} characters.
+            </div>
+            <div *ngIf="firstName.errors.maxlength">
+                First Name cannot be longer than {{ firstName.errors.maxlength }}.
+            </div>
+            <div *ngIf="firstName.errors.pattern">
+                Only letters, numbers and '-' are allowed.
+            </div>
+        </div>
+    </div>
+    <div class='form-group'>
+        <label for="comment">Comment</label>
+        <textarea id="comment" ngModel name="comment" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+  
+  <div *ngFor="let item of items">{{item}}</div>
